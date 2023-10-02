@@ -1,0 +1,10 @@
+image:
+  tag: "427"
+server:
+  workers: 3
+coordinator:
+  jvm:
+    maxHeapSize: "2G"
+worker:
+  jvm:
+    maxHeapSize: "2G"
