@@ -5,11 +5,12 @@ made by Fabio Yuji Ivamoto
 1. Install Minikube
 2. Install Docker
 3. Install Helm
-4. Install Helm Dashboard 
+4. Install Helm Dashboard
 5. Install https://min.io/download#/kubernetes
 
 # Minikube initialization
 1. `minikube start`
+2. `minikube dashboard`
 
 # Helm dashboard
 1. `helm plugin install https://github.com/komodorio/helm-dashboard.git`
