@@ -6,10 +6,10 @@ import os
 app = Flask(__name__)
 
 # MinIO configuration
-minio_endpoint = 'minio_server_url'  # Replace with your MinIO server URL
-minio_access_key = 'your_access_key'
-minio_secret_key = 'your_secret_key'
-minio_bucket_name = 'your_bucket_name'
+minio_endpoint = 'my-minio'  # Replace with your MinIO server URL
+minio_access_key = 'minio_access_key'
+minio_secret_key = 'minio_secret_key'
+minio_bucket_name = 'warehouse'
 
 # Initialize MinIO client
 minio_client = Minio(minio_endpoint,

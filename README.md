@@ -2,7 +2,7 @@
 made by Fabio Yuji Ivamoto
 
 # Requirements
-1. Install Minikube
+1. Install Minikube (or any K8s provider)
    1. `minikube start`
    2. `minikube dashboard`
 2. Install Docker
@@ -10,10 +10,7 @@ made by Fabio Yuji Ivamoto
 4. Install Helm Dashboard
    1. `helm plugin install https://github.com/komodorio/helm-dashboard.git`
    2. `helm dashboard --port 8180`
-5. Install Minio 
-   1. `helm repo add bitnami https://charts.bitnami.com/bitnami`
-   2. `helm install my-minio bitnami/minio --version 12.8.11`
-6. 
+
 
 # Kubernetes Configuration
 1. in order to the cluster pull images from the Docker Hub registry, you have to configure the secrets as follow:
@@ -25,7 +22,9 @@ kubectl create secret docker-registry my-dockerhub-secret \
   --docker-email=your-email@example.com
 
 ```
-
+2. enable ingress to pull images from internet `minikube addon enable ingress`
+# Initial setup
+1. run `sh deployments/scripts/up.sh`
 # Trino configuration
 1. Check you K8S cluster: `kubectl cluster-info`
 2. add trino repo: `helm repo add trino https://trinodb.github.io/charts`

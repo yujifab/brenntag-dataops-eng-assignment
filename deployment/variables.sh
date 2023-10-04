@@ -1,13 +1,13 @@
 #!/bin/bash
 
-
+date_now=$(date +"%Y%m%d%H%M%S")
 # Define minio root user
 MIN_USR="rootuser"
 # Secret key length at least 8 characters for minio
 MIN_PW="Labk8s01!"
 PG_PW="Labk8s01!"
 REGISTRY="111111111111.dkr.ecr.us-east-1.amazonaws.com/hive"
-#Docker image name
+CHART_DIR="../charts"
 HELM_CHART_NAME="flask-app"
 HELM_CHART_VERSION="0.1.0"
 DOCKER_IMAGE_NAME="brenntag_api_csv"
