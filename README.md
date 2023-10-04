@@ -3,34 +3,64 @@ made by Fabio Yuji Ivamoto
 
 # Requirements
 1. Install Minikube
+   1. `minikube start`
+   2. `minikube dashboard`
 2. Install Docker
 3. Install Helm
 4. Install Helm Dashboard
-5. Install https://min.io/download#/kubernetes
+   1. `helm plugin install https://github.com/komodorio/helm-dashboard.git`
+   2. `helm dashboard --port 8180`
+5. Install Minio 
+   1. `helm repo add bitnami https://charts.bitnami.com/bitnami`
+   2. `helm install my-minio bitnami/minio --version 12.8.11`
+6. 
 
-# Minikube initialization
-1. `minikube start`
-2. `minikube dashboard`
+# Kubernetes Configuration
+1. in order to the cluster pull images from the Docker Hub registry, you have to configure the secrets as follow:
+```
+kubectl create secret docker-registry my-dockerhub-secret \
+  --docker-server=https://index.docker.io/v1/ \
+  --docker-username=your-dockerhub-username \
+  --docker-password=your-dockerhub-password \
+  --docker-email=your-email@example.com
 
-# Helm dashboard
-1. `helm plugin install https://github.com/komodorio/helm-dashboard.git`
-2. UI starter ` helm dashboard`
+```
 
 # Trino configuration
-0. Check you K8S cluster: `kubectl cluster-info`
-1. add trino repo: `helm repo add trino https://trinodb.github.io/charts`
-2. Install Trino cluster: `helm install example-trino-cluster trino/trino`
-3. Port forward: 
+1. Check you K8S cluster: `kubectl cluster-info`
+2. add trino repo: `helm repo add trino https://trinodb.github.io/charts`
+3. Install Trino cluster: `helm install brenntag-trino-cluster trino/trino`
+4. Port forward: 
 
 
-`export POD_NAME=$(kubectl get pods --namespace default -l "app=trino,release=example-trino-cluster,component=coordinator" -o jsonpath="{.items[0].metadata.name}")
+`export POD_NAME=$(kubectl get pods --namespace default -l "app=trino,release=brenntag-trino-cluster,component=coordinator" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward $POD_NAME 8080:8080`
 
+# Minio Configuration
+1. `export ROOT_USER=$(kubectl get secret --namespace default my-minio -o jsonpath="{.data.root-user}" | base64 -d)`
+admin
+2. `export ROOT_PASSWORD=$(kubectl get secret --namespace default my-minio -o jsonpath="{.data.root-password}" | base64 -d)`
+2UAboLpB21
+3. 
+``` 
+kubectl run --namespace default my-minio-client \ 
+     --rm --tty -i --restart='Never' \
+     --env MINIO_SERVER_ROOT_USER=$ROOT_USER \
+     --env MINIO_SERVER_ROOT_PASSWORD=$ROOT_PASSWORD \
+     --env MINIO_SERVER_HOST=my-minio \
+     --image docker.io/bitnami/minio-client:2023.9.29-debian-11-r0 -- admin info minio
+``` 
+
+
+
+# Application Build
+1. `docker build --tag python-docker .`
+
 # Clean Up environment
-1. `helm uninstall example-trino-cluster`
+1. `helm uninstall brenntag-trino-cluster`
 2. `helm plugin uninstall dashboard`
-2. verifying current pods ` helm uninstall example-trino-clusterk`
-3. `minikube delete --all
+3. verifying current pods ` helm uninstall brenntag-trino-cluster`
+4. `minikube delete --all
 `
 
 

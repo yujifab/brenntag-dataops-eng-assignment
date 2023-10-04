@@ -1,0 +1,12 @@
+image:
+  repository: docker.io/yujifab
+  tag: flask-app
+  pullPolicy: Always
+
+imagePullSecrets:
+  - name: my-dockerhub-secret-01
+
+dockerhub:
+  username: yujifab
+  password: dckr_pat_Oh-OYnmSAZr7cgHeto8apaYEDoE
+  email: yujivamoto@gmail.com
