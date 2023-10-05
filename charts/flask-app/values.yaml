@@ -2,3 +2,19 @@ image:
   repository: yujifab/brenntag_api_csv
   tag: api_csv
   pullPolicy: IfNotPresent
+
+web:
+  replicas: 2
+  image: python-demo-app
+  tag: init
+  args:
+    - '--bind'
+    - '0.0.0.0'
+    - 'app:app'
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 100m
+    limits:
+      memory: 256Mi
+      cpu: 200m

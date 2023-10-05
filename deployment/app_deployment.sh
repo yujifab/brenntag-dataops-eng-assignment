@@ -31,10 +31,11 @@ docker push "${DOCKER_HUB_USER}"/"${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}"
 helm package "${CHART_DIR}"/flask-app
 helm_login
 helm push "${HELM_CHART_NAME}"-"${HELM_CHART_VERSION}".tgz oci://"${DOCKER_HUB_URL}"/"${DOCKER_HUB_USER}"
-#helm_login
-#helm uninstall brenntag-api
+helm_login
+#helm uninstall brenntag-api -n trino
 # possibly you can install from the repository.
 # helm install brenntag-api oci://registry-1."${DOCKER_HUB_URL}"/"${DOCKER_HUB_USER}"/"${HELM_CHART_NAME}" --version "${HELM_CHART_VERSION}"
 # but I will install from the app directory
-helm install brenntag-api ../charts/flask-app -n trino
+
+helm upgrade --install brenntag-api ../charts/flask-app -n trino
 

@@ -6,5 +6,4 @@ defaultBuckets: "tiny, warehouse"
 
 service:
   type: NodePort
-  ports:
-    - port:
+  nodePort: 9000

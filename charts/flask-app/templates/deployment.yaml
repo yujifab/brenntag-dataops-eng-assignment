@@ -7,15 +7,28 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-flask-app
+      role: web
   template:
     metadata:
       labels:
         app: {{ .Release.Name }}-flask-app
+        role: web
     spec:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: 5000
-
+        - containerPort: 5001
+        readinessProbe:
+          initialDelaySeconds: 10
+          httpGet:
+            port: 5001
+            path: /
+        livenessProbe:
+          initialDelaySeconds: 10
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - 'pidof -x gunicorn'

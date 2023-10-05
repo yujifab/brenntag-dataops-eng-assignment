@@ -1,22 +1,20 @@
 from flask import Flask, request, jsonify, render_template
 from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
-from werkzeug.utils import secure_filename
 import os
 from wtforms.validators import InputRequired
 from minio import Minio
 from minio.error import S3Error
 import logging
-import time
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
 
 # MinIO configuration
 # minio_endpoint = '127.0.0.1:9000'  # this is for local
-minio_endpoint = "172.18.0.2:9000"  # this is for docker
-minio_access_key = 'ROOTNAME'
-minio_secret_key = 'CHANGEME123'
+minio_endpoint = "my-minio.trino.svc.cluster.local:9000"  # this is for docker
+minio_access_key = 'minio_access_key'
+minio_secret_key = 'minio_secret_key'
 minio_bucket_name = 'warehouse'
 
 logging.info("INIT")
