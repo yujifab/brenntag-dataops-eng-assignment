@@ -11,7 +11,7 @@
 **/.dockerignore
 **/.env
 **/.git
-**/.gitignore
+../venv/.gitignore
 **/.project
 **/.settings
 **/.toolstarget
@@ -20,7 +20,7 @@
 **/*.*proj.user
 **/*.dbmdl
 **/*.jfm
-**/bin
+../venv/bin
 **/charts
 **/docker-compose*
 **/compose*

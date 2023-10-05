@@ -15,6 +15,6 @@ helm uninstall my-postgresql -n trino
 helm uninstall my-minio -n trino
 helm uninstall hive-metastore-postgresql -n trino
 helm uninstall my-hive-metastore -n trino
-helm uninstall my-redis -n trino
+#helm uninstall my-redis -n trino
 helm uninstall my-trino -n trino
 )

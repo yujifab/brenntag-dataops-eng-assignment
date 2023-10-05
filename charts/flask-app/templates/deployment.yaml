@@ -6,16 +6,16 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask-app
+      app: {{ .Release.Name }}-flask-app
   template:
     metadata:
       labels:
-        app: flask-app
+        app: {{ .Release.Name }}-flask-app
     spec:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: 80
+        - containerPort: 5000
 

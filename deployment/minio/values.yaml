@@ -3,3 +3,8 @@ auth:
   rootPassword: minio_secret_key
 
 defaultBuckets: "tiny, warehouse"
+
+service:
+  type: NodePort
+  ports:
+    - port:

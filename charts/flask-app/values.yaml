@@ -1,4 +1,4 @@
 image:
   repository: yujifab/brenntag_api_csv
   tag: api_csv
-  pullPolicy: Always
+  pullPolicy: IfNotPresent

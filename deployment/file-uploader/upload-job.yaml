@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: upload-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: curl
+        image: curlimages/curl:latest
+        command: ["curl"]
+        args: ["-X", "POST", "-F", "file=@/mnt/config/file.txt", "http://your-flask-service/upload"]
+        volumeMounts:
+        - name: upload-config
+          mountPath: /mnt/files
+      restartPolicy: Never
+      volumes:
+      - name: upload-files
+        configMap:
+          name: upload-files
+
+
+

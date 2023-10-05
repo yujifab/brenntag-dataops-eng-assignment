@@ -18,7 +18,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY ../.. /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -30,7 +30,11 @@ EXPOSE 80
 ENV FLASK_APP api_csv.py
 
 # Run app.py when the container launches
-CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]
+#CMD ["flask", "run", "--host=0.0.0.0", "--port=5001"]
+# configure the container to run in an executed manner
+ENTRYPOINT [ "python" ]
+
+CMD ["api_csv.py" ]
 
 #This assumes that your Flask application inside the container is listening on port 80. The -p 5000:80 flag maps port 5000 on your host to port 80 in the container.
 #Now, your Flask application should be accessible at http://127.0.0.1:5000/upload. If your MinIO server is running locally, make sure to update the minio_endpoint in your app.py to the appropriate URL accessible from within the Docker container. If the MinIO server is running on the host machine, you might need to use the host machine's IP address instead of localhost or 127.0.0.1.
