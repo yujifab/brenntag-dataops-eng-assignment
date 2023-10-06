@@ -3,3 +3,6 @@
 /local_setup/hive-metastore-main/etc/hostname
 /local_setup/hive-metastore-main/etc/hosts
 /local_setup/hive-metastore-main/etc/resolv.conf
+/local_setup/hive-metastore-main/data/
+/local_setup/hive-metastore-main/data/.minio.sys/
+/local_setup/hive-metastore-main/data/.minio.sys/buckets/.minio.sys/
