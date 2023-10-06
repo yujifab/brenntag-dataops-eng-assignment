@@ -11,8 +11,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
 
 # MinIO configuration
-# minio_endpoint = '127.0.0.1:9000'  # this is for local
-minio_endpoint = "my-minio.trino.svc.cluster.local:9000"  # this is for docker
+minio_endpoint = '127.0.0.1:9000'  # this is for local
+# minio_endpoint = '172.19.0.3:9000'
+# minio_endpoint = "my-minio.trino.svc.cluster.local:9000"  # this is for kubernetes
 minio_access_key = 'minio_access_key'
 minio_secret_key = 'minio_secret_key'
 minio_bucket_name = 'warehouse'

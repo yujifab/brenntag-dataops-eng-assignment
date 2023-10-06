@@ -10,25 +10,14 @@ made by Fabio Yuji Ivamoto
 3. Helm
 
 # Application Local test
-1. Create a bridge network
-`docker network create brenntag-network`
-
-2. Start minio environment via Docker
+1. Start bigdata environment via Docker compose
 ```
-mkdir -p ~/minio/data
+cd local_setup
 
-docker run \
-   -p 9000:9000 \
-   -p 9090:9090 \
-   --name minio \
-   -v ~/minio/data:/data \
-   -e "MINIO_ROOT_USER=minio_access_key" \
-   -e "MINIO_ROOT_PASSWORD=minio_secret_key" \
-   --network brenntag-network \
-   quay.io/minio/minio server /data --console-address ":9090"
+docker-compose up
 ```
 
-3. Start the application from the root folder
+2. Start the application from the root folder
 ```
 
 docker build \
@@ -39,8 +28,12 @@ docker build \
 ```
 
 4. Run the container
+```
+docker run --name my-flask-app -p 5001:5001 --network bridge -d brenntag_api_csv
+docker run --name my-flask-app -p 5001:5001 --network brenntag-network -d brenntag_api_csv
 
-`docker run --name my-flask-app -p 5001:5001 --network brenntag-network -d brenntag_api_csv`
+```
+
 
 4. Check the services running via browser
 ![local containers](./img/local_containers.png)
