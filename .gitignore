@@ -1,1 +1,5 @@
 .idea
+/local_setup/hive-metastore-main/.github/
+/local_setup/hive-metastore-main/etc/hostname
+/local_setup/hive-metastore-main/etc/hosts
+/local_setup/hive-metastore-main/etc/resolv.conf

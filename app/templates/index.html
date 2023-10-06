@@ -12,7 +12,12 @@
     <form method='POST' enctype='multipart/form-data'>
         {{form.hidden_tag()}}
         {{form.file()}}
+        <label for="textbox">CREATE TABLE SINTAX:</label>
+        <!-- Use a textarea instead of an input -->
+        <textarea id="textbox" name="user_text" rows="4" cols="50" required></textarea>
+        <br>
         {{form.submit()}}
     </form>
+
 </body>
 </html>

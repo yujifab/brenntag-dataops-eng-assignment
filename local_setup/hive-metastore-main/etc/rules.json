@@ -1,0 +1,12 @@
+{
+  "catalogs": [
+    {
+      "catalog": ".*",
+      "allow": "all"
+    },
+    {
+      "catalog": "hive",
+      "allow": "all"
+    }
+  ]
+}
