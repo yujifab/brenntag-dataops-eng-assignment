@@ -4,7 +4,7 @@ set -euo pipefail
 # Script to build Dockerfile
 
 # Set variables.
-source variables.sh
+source ./variables.sh
 docker_login () {
     echo "${DOCKER_HUB_TOKEN}" | docker login --username "${DOCKER_HUB_USER}" --password-stdin "${DOCKER_HUB_URL}"
 

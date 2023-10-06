@@ -68,24 +68,43 @@ Obs: Check final remarks! You will get an error when applying the query + csv fi
 
 # Kubernetes Configuration
 In this case, I used minikube.
-1. enable ingress to pull images from internet `minikube addons enable ingress`
+1. start k8s cluster
+```
+minikube start   
+   ``` 
+1. enable ingress to pull images from internet 
+
+```
+minikube addons enable ingress
+```
 
 
 # Initial setup for Kubernetes
-1. The script below install all infrastructure from public repositories
+1. The script below install all infrastructure using Helm Charts from public repositories
 ```
-sh deployments/scripts/up.sh
+sh deployment/scripts/up.sh
 
 ```
+
 2. I have created a helm chart for the REST app python. We install in the same way using helm.
 
 ```
-sh deployments/app_deployment.sh
+cd deployment
+sh app_deployment.sh
 ```
 
 3. You can check all services up and running in Kubernetes
 
+```
+helm list -A
+```
 ![helm list](./img/helm_list.png)
+
+4. you can also check all containers running on minikube
+
+```
+minikube dashboard
+```
 
 
 # Trino configuration
@@ -109,6 +128,8 @@ kubectl port-forward $POD_NAME 8080:8080 -n trino
 So the flask python app is not able to create the desired table from the csv uploaded. But here, the intention was to upload a csv and include the QUERY sintax for TRINO to create an external table with the location pointing to the s3/minio path
 
 2. I am definitely not good on configuring network/ports/ingress within containers in Kubernetes. Even all containers running in the same network, forwarding the ports. creating ingress charts, I was not able to make the flask app available via local browser when it's running in minikube/k8s. I'm open for suggestions and help here :) 
+
+3. Minikube behave terrible locally. Too unstable, some pod crashing frequently. :(
 
 # REFS
 
